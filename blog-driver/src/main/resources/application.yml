@@ -1,1 +1,12 @@
-
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/blogdrive?useSSL=false&serverTimezone=UTC
+    username: root
+    password: A1234567
+  jpa:
+    hibernate:
+      ddl-auto: update
+      jdbc:
+        time_zone: UTC
+server:
+  port: 83

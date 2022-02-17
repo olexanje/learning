@@ -6,19 +6,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Entity
-@Table(name = "global_settings")
+@Table(name = "tags")
 @Data
 @NoArgsConstructor
-public class GlobalSettings {
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column
-    String code;
-    @Column
     String name;
-    @Column
-    String value;
+
+    @OneToOne(mappedBy = "tag")
+    Tag2Post tag2Post;
+
 }
