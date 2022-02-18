@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "post_votes")
-@Data
 @NoArgsConstructor
 public class PostVotes {
 
@@ -33,4 +32,52 @@ public class PostVotes {
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id", insertable = false, updatable = false)
     Post post;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
+    public Byte getValue() {
+        return value;
+    }
+
+    public void setValue(Byte value) {
+        this.value = value;
+    }
+
+    public List<User> getUserVotesList() {
+        return userVotesList;
+    }
+
+    public Post getPost() {
+        return post;
+    }
 }

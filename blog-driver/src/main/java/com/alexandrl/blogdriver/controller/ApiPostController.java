@@ -1,6 +1,7 @@
 package com.alexandrl.blogdriver.controller;
 
 
+import com.alexandrl.blogdriver.model.Post;
 import com.alexandrl.blogdriver.service.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,4 +30,8 @@ public class ApiPostController {
                 "posts", postService.getAllPost()));
     }
 
+    @GetMapping(path = "/posts/", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Post> postList() {
+        return postService.findPosts();
+    }
 }

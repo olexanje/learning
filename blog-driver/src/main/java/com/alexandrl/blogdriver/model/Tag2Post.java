@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "tag2post")
-@Data
 @NoArgsConstructor
 public class Tag2Post {
 
@@ -28,4 +27,36 @@ public class Tag2Post {
     @ManyToMany
     @JoinColumn(name = "post_id", referencedColumnName = "id", insertable = false, updatable = false)
     List<Post> posts;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
+    }
+
+    public Integer getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Integer tagId) {
+        this.tagId = tagId;
+    }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
 }
