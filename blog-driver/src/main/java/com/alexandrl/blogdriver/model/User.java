@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(name = "is_moderator")
-    Integer isModerator;
+    Boolean isModerator;
     @Column(name = "reg_time")
     LocalDateTime regTime;
     @Column
