@@ -21,7 +21,7 @@ public class Tag2Post {
     @Column(name = "tag_id")
     Integer tagId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "tag_id", referencedColumnName = "id", insertable = false, updatable = false)
     Tag tag;
 
