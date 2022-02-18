@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -19,7 +20,7 @@ public class Tag {
     @Column
     String name;
 
-    @OneToOne(mappedBy = "tag")
-    Tag2Post tag2Post;
+    @OneToMany(mappedBy = "tag")
+    List<Tag2Post> tag2PostList;
 
 }
