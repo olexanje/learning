@@ -1,145 +1,160 @@
 package com.alexandrl.blogdriver.model;
 
-
 import com.alexandrl.blogdriver.model.Unums.ModerationStatus;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
+/**
+ * Post Entity styled by google checks
+ */
 @Entity
 @Table(name = "posts")
 @NoArgsConstructor
 public class Post {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    @Column(name = "is_active", nullable = false)
-    Boolean isActive;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "moderation_status", nullable = false)
-    ModerationStatus moderationStatus;
-    @Column(name = "moderator_id")
-    Integer moderatorId;
-    @Column(name = "user_id", nullable = false)
-    Integer userId;
-    @Column(nullable = false)
-    LocalDateTime time;
-    @Column(nullable = false)
-    String title;
-    @Column(nullable = false)
-    String text;
-    @Column(name = "view_count", nullable = false)
-    Integer viewCount;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Integer id;
+  @Column(name = "is_active", nullable = false)
+  Boolean isActive;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "moderation_status", nullable = false)
+  ModerationStatus moderationStatus;
+  @Column(nullable = false)
+  LocalDateTime time;
+  @Column(nullable = false)
+  String title;
+  @Column(nullable = false)
+  String text;
+  @Column(name = "view_count", nullable = false)
+  Integer viewCount;
+  /** Mapping to user */
+  @ManyToOne
+  @JoinColumn(name = "user_id", referencedColumnName = "id",
+      insertable = false, updatable = false)
+  User user;
+  /** Mapping to moderator */
+  @ManyToOne
+  @JoinColumn(name = "moderator_id", referencedColumnName = "id",
+      insertable = false, updatable = false)
+  User moderator;
+  /** Mapping to Tag via tag2post */
+  @ManyToMany(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
+  @JoinTable(name = "tag2post",
+      joinColumns = @JoinColumn(name = "post_id"),
+      inverseJoinColumns = @JoinColumn(name = "tag_id")
+  )
+  List<Tag> tagList;
+  @OneToMany(mappedBy = "post")
+  List<PostVotes> postVotesList;
+  @OneToMany(mappedBy = "post")
+  List<PostComments> postCommentsList;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
-    User user;
+  @Column(name = "user_id", nullable = false)
+  public Integer getUserId() {
+    return user.getId();
+  }
 
-    @ManyToOne
-    @JoinColumn(name = "moderator_id", referencedColumnName = "id", insertable = false, updatable = false)
-    User moderator;
+  @Column(name = "moderator_id")
+  public Integer getModeratorId() {
+    return moderator.getId();
+  }
 
-    @ManyToMany(mappedBy = "posts")
-    List<Tag2Post> tag2PostList;
+  public void setUser(User user) {
+    this.user = user;
+  }
 
-    @OneToMany(mappedBy = "post")
-    List<PostVotes> postVotesList;
+  public User getUser() {
+    return user;
+  }
 
-    @OneToMany(mappedBy = "post")
-    List<PostComments> postCommentsList;
+  public User getModerator() {
+    return moderator;
+  }
 
-    public User getUser() {
-        return user;
-    }
+  public List<Tag> getTagList() {
+    return tagList;
+  }
 
-    public User getModerator() {
-        return moderator;
-    }
+  public List<PostVotes> getPostVotesList() {
+    return postVotesList;
+  }
 
-    public List<Tag2Post> getTag2PostList() {
-        return tag2PostList;
-    }
+  public List<PostComments> getPostCommentsList() {
+    return postCommentsList;
+  }
 
-    public List<PostVotes> getPostVotesList() {
-        return postVotesList;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public List<PostComments> getPostCommentsList() {
-        return postCommentsList;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public Boolean getActive() {
+    return isActive;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setActive(Boolean active) {
+    isActive = active;
+  }
 
-    public Boolean getActive() {
-        return isActive;
-    }
+  public ModerationStatus getModerationStatus() {
+    return moderationStatus;
+  }
 
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
+  public void setModerationStatus(ModerationStatus moderationStatus) {
+    this.moderationStatus = moderationStatus;
+  }
 
-    public ModerationStatus getModerationStatus() {
-        return moderationStatus;
-    }
+  public LocalDateTime getTime() {
+    return time;
+  }
 
-    public void setModerationStatus(ModerationStatus moderationStatus) {
-        this.moderationStatus = moderationStatus;
-    }
+  public void setTime(LocalDateTime time) {
+    this.time = time;
+  }
 
-    public Integer getModeratorId() {
-        return moderatorId;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setModeratorId(Integer moderatorId) {
-        this.moderatorId = moderatorId;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public Integer getUserId() {
-        return userId;
-    }
+  public String getText() {
+    return text;
+  }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+  public void setText(String text) {
+    this.text = text;
+  }
 
-    public LocalDateTime getTime() {
-        return time;
-    }
+  public Integer getViewCount() {
+    return viewCount;
+  }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Integer getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(Integer viewCount) {
-        this.viewCount = viewCount;
-    }
+  public void setViewCount(Integer viewCount) {
+    this.viewCount = viewCount;
+  }
 }

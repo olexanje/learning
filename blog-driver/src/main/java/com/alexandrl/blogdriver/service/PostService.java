@@ -79,6 +79,8 @@ public class PostService {
     }
 
     private String getAnnounce(String text) {
+        if (text.length() > 100) {
         return text.substring(0, text.indexOf(" ", 100)) + "...";
+        } else return text;
     }
 }

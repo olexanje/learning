@@ -1,126 +1,126 @@
 package com.alexandrl.blogdriver.model;
 
-
-import lombok.NoArgsConstructor;
-
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    @Column(name = "is_moderator", nullable = false)
-    Boolean isModerator;
-    @Column(name = "reg_time", nullable = false)
-    LocalDateTime regTime;
-    @Column(nullable = false)
-    String name;
-    @Column(nullable = false)
-    String email;
-    @Column(nullable = false)
-    String password;
-    @Column
-    String code;
-    @Column
-    String photo;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Integer id;
+  @Column(name = "is_moderator", nullable = false)
+  Boolean isModerator;
+  @Column(name = "reg_time", nullable = false)
+  LocalDateTime regTime;
+  @Column(nullable = false)
+  String name;
+  @Column(nullable = false)
+  String email;
+  @Column(nullable = false)
+  String password;
+  @Column
+  String code;
+  @Column
+  String photo;
+  @OneToMany(mappedBy = "user")
+  List<Post> userPosts;
+  @OneToMany(mappedBy = "moderator")
+  List<Post> postsForModeration;
+  @ManyToMany(mappedBy = "userVotesList")
+  List<PostVotes> postVotesList;
+  @OneToMany(mappedBy = "user")
+  List<PostComments> postCommentsList;
 
-    @OneToMany(mappedBy = "user")
-    List<Post> userPosts;
+  public List<Post> getUserPosts() {
+    return userPosts;
+  }
 
-    @OneToMany(mappedBy = "moderator")
-    List<Post> postsForModeration;
+  public List<Post> getPostsForModeration() {
+    return postsForModeration;
+  }
 
-    @ManyToMany(mappedBy = "userVotesList")
-    List<PostVotes> postVotesList;
+  public List<PostVotes> getPostVotesList() {
+    return postVotesList;
+  }
 
-    @OneToMany(mappedBy = "user")
-    List<PostComments> postCommentsList;
+  public List<PostComments> getPostCommentsList() {
+    return postCommentsList;
+  }
 
-    public List<Post> getUserPosts() {
-        return userPosts;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public List<Post> getPostsForModeration() {
-        return postsForModeration;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public List<PostVotes> getPostVotesList() {
-        return postVotesList;
-    }
+  public Boolean getModerator() {
+    return isModerator;
+  }
 
-    public List<PostComments> getPostCommentsList() {
-        return postCommentsList;
-    }
+  public void setModerator(Boolean moderator) {
+    isModerator = moderator;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public LocalDateTime getRegTime() {
+    return regTime;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setRegTime(LocalDateTime regTime) {
+    this.regTime = regTime;
+  }
 
-    public Boolean getModerator() {
-        return isModerator;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setModerator(Boolean moderator) {
-        isModerator = moderator;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public LocalDateTime getRegTime() {
-        return regTime;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public void setRegTime(LocalDateTime regTime) {
-        this.regTime = regTime;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setPassword(String password) {
 
-    public String getEmail() {
-        return email;
-    }
+    this.password = password;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-    public void setPassword(String password) {
+  public String getPhoto() {
+    return photo;
+  }
 
-        this.password = password;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
 }

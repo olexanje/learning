@@ -17,8 +17,8 @@ public class Tag {
     @Column(nullable = false)
     String name;
 
-    @OneToMany(mappedBy = "tag")
-    List<Tag2Post> tag2PostList;
+    @ManyToMany(mappedBy = "tagList")
+    List<Post> postList;
 
     public Integer getId() {
         return id;
@@ -36,7 +36,7 @@ public class Tag {
         this.name = name;
     }
 
-    public List<Tag2Post> getTag2PostList() {
-        return tag2PostList;
+    public List<Post> getPostList() {
+        return postList;
     }
 }
