@@ -16,13 +16,13 @@ public class PostComments {
     Integer id;
     @Column(name = "parent_id")
     Integer parentId;
-    @Column(name = "post_id")
+    @Column(name = "post_id", nullable = false)
     Integer postId;
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     Integer userId;
-    @Column
+    @Column(nullable = false)
     LocalDateTime time;
-    @Column
+    @Column(nullable = false)
     String text;
 
     @ManyToOne

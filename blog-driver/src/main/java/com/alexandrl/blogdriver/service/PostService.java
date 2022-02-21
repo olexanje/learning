@@ -9,17 +9,25 @@ import com.alexandrl.blogdriver.repository.PostRepository;
 import com.alexandrl.blogdriver.repository.PostVotesRepository;
 import com.alexandrl.blogdriver.repository.UserRepository;
 import com.alexandrl.blogdriver.service.exceptions.ValidateUserException;
+import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Log
 @Service
 public class PostService {
+
+    @Autowired
     PostRepository postRepository;
+    @Autowired
     PostCommentsRepository commentsRepository;
+    @Autowired
     PostVotesRepository votesRepository;
+    @Autowired
     UserRepository userRepository;
 
     public long getPostsCount() {
@@ -29,19 +37,18 @@ public class PostService {
         return postRepository.count();
     }
 
-    public List<Post> findPosts() {
-        return postRepository.findAll();
-    }
-
     public List<PostDto> getAllPost() {
         if (postRepository == null) {
             return new ArrayList<>();
         }
+
         List<Post> postList = postRepository.findAll();
         List<PostDto> postDtoList = new ArrayList<>();
         postList.forEach(post -> postDtoList.add(convertPostToPostDto(post)));
         return postDtoList;
     }
+
+
 
 
     private PostDto convertPostToPostDto(Post post) {

@@ -15,11 +15,11 @@ public class CaptchaCodes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column
+    @Column(nullable = false)
     LocalDateTime time;
-    @Column
+    @Column(nullable = false)
     String code;
-    @Column
+    @Column(nullable = false)
     String secret_code;
 
     public Integer getId() {

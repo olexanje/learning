@@ -16,13 +16,13 @@ public class PostVotes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     Integer userId;
-    @Column(name = "post_id")
+    @Column(name = "post_id", nullable = false)
     Integer postId;
-    @Column
+    @Column(nullable = false)
     LocalDateTime time;
-    @Column
+    @Column(nullable = false)
     Byte value;
 
     @ManyToMany

@@ -15,9 +15,9 @@ public class Tag2Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(name = "post_id")
+    @Column(name = "post_id", nullable = false)
     Integer postId;
-    @Column(name = "tag_id")
+    @Column(name = "tag_id", nullable = false)
     Integer tagId;
 
     @ManyToOne

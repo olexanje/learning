@@ -1,6 +1,8 @@
 package com.alexandrl.blogdriver.model;
 
 
+import com.alexandrl.blogdriver.model.Unums.GlobalSettingsCode;
+import com.alexandrl.blogdriver.model.Unums.GlobalSettingsValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,12 +16,14 @@ public class GlobalSettings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column
-    String code;
-    @Column
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    GlobalSettingsCode code;
+    @Column(nullable = false)
     String name;
-    @Column
-    String value;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    GlobalSettingsValue value;
 
     public Integer getId() {
         return id;
@@ -29,11 +33,11 @@ public class GlobalSettings {
         this.id = id;
     }
 
-    public String getCode() {
+    public GlobalSettingsCode getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(GlobalSettingsCode code) {
         this.code = code;
     }
 
@@ -45,11 +49,11 @@ public class GlobalSettings {
         this.name = name;
     }
 
-    public String getValue() {
+    public GlobalSettingsValue getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(GlobalSettingsValue value) {
         this.value = value;
     }
 }

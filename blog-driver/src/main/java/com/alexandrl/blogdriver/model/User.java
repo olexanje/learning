@@ -16,15 +16,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(name = "is_moderator")
+    @Column(name = "is_moderator", nullable = false)
     Boolean isModerator;
-    @Column(name = "reg_time")
+    @Column(name = "reg_time", nullable = false)
     LocalDateTime regTime;
-    @Column
+    @Column(nullable = false)
     String name;
-    @Column
+    @Column(nullable = false)
     String email;
-    @Column
+    @Column(nullable = false)
     String password;
     @Column
     String code;

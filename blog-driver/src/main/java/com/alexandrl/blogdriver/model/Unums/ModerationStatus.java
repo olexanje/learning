@@ -1,4 +1,4 @@
-package com.alexandrl.blogdriver.model;
+package com.alexandrl.blogdriver.model.Unums;
 
 public enum ModerationStatus {
     NEW,
