@@ -1,6 +1,6 @@
 package com.alexandrl.blogdriver.model;
 
-import com.alexandrl.blogdriver.model.Unums.ModerationStatus;
+import com.alexandrl.blogdriver.model.enums.ModerationStatus;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;

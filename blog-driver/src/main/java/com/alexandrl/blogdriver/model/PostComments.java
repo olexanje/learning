@@ -1,91 +1,94 @@
 package com.alexandrl.blogdriver.model;
 
-
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "post_comments")
 @NoArgsConstructor
 public class PostComments {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    @Column(name = "parent_id")
-    Integer parentId;
-    @Column(name = "post_id", nullable = false)
-    Integer postId;
-    @Column(name = "user_id", nullable = false)
-    Integer userId;
-    @Column(nullable = false)
-    LocalDateTime time;
-    @Column(nullable = false)
-    String text;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Integer id;
+  @Column(name = "parent_id")
+  Integer parentId;
+  @Column(nullable = false)
+  LocalDateTime time;
+  @Column(nullable = false)
+  String text;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
-    User user;
+  @ManyToOne
+  @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+  User user;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id", insertable = false, updatable = false)
-    Post post;
+  @ManyToOne
+  @JoinColumn(name = "post_id", referencedColumnName = "id", insertable = false, updatable = false)
+  Post post;
 
-    public User getUser() {
-        return user;
-    }
+  public User getUser() {
+    return user;
+  }
 
-    public Post getPost() {
-        return post;
-    }
+  public Post getPost() {
+    return post;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public Integer getParentId() {
-        return parentId;
-    }
+  public Integer getParentId() {
+    return parentId;
+  }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
+  public void setParentId(Integer parentId) {
+    this.parentId = parentId;
+  }
 
-    public Integer getPostId() {
-        return postId;
-    }
+  @Column(name = "post_id", nullable = false)
+  public Integer getPostId() {
+    return post.getId();
+  }
 
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
+  @Column(name = "user_id", nullable = false)
+  public Integer getUserId() {
+    return user.getId();
+  }
 
-    public Integer getUserId() {
-        return userId;
-    }
+  public LocalDateTime getTime() {
+    return time;
+  }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+  public void setTime(LocalDateTime time) {
+    this.time = time;
+  }
 
-    public LocalDateTime getTime() {
-        return time;
-    }
+  public String getText() {
+    return text;
+  }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
-    }
+  public void setText(String text) {
+    this.text = text;
+  }
 
-    public String getText() {
-        return text;
-    }
+  public void setUser(User user) {
+    this.user = user;
+  }
 
-    public void setText(String text) {
-        this.text = text;
-    }
+  public void setPost(Post post) {
+    this.post = post;
+  }
 }
